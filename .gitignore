@@ -3,3 +3,5 @@ data
 app
 node_modules
 bower_components
+webapp/css
+webapp/js

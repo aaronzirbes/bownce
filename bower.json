@@ -16,5 +16,9 @@
   ],
   "devDependencies": {
     "bootstrap": "~3.1.1"
+  },
+  "dependencies": {
+    "angularjs": "*",
+    "angular": "~1.2.16"
   }
 }
