@@ -1,5 +1,5 @@
 (function() {
-	'use strict';
+	"use strict";
 
-	var module = angular.module('bownce.app.main', []);
+	angular.module("bownce.app.main", []);
 })();

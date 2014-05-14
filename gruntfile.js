@@ -18,11 +18,17 @@ module.exports = function(grunt) {
             all_scripts: {
                 files: {
                     'public/js/common.js': ['bower_components/jquery/dist/jquery.min.js', 'bower_components/angular/angular.min.js'],
-                    'public/js/page.js': ['src/js/apps/bownce/**/*.js']
+                    'public/js/main.js': ['src/js/components/bownce-counter/bownce-counter-directive.js']
+                },
+                options: {
+                    transform: ['brfs']
                 }
             }
         },
         eslint: {
+            options: {
+                config: 'conf/eslint.json'
+            },
             target: ['src/**/*.js']
         },
         less: {
