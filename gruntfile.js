@@ -11,14 +11,14 @@ module.exports = function(grunt) {
                 /**
                  * Overrides less output.  This step should always be the last style change.
                  */
-                src: 'webapp/css/**/*.css'
+                src: 'public/css/**/*.css'
             }
         },
         browserify: {
             all_scripts: {
                 files: {
-                    'webapp/js/common.js': ['bower_components/jquery/dist/jquery.min.js', 'bower_components/angular/angular.min.js'],
-                    'webapp/js/page.js': ['src/js/apps/bownce/**/*.js']
+                    'public/js/common.js': ['bower_components/jquery/dist/jquery.min.js', 'bower_components/angular/angular.min.js'],
+                    'public/js/page.js': ['src/js/apps/bownce/**/*.js']
                 }
             }
         },
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
             all_styles: {
                 options: {},
                 files: {
-                    'webapp/css/common.css': 'src/less/common.less'
+                    'public/css/common.css': 'src/less/common.less'
                 }
             }
         },
@@ -50,8 +50,9 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('default', ['watch:everything']);
+    grunt.registerTask('default', ['styles', 'scripts']);
     grunt.registerTask('styles', ['less', 'autoprefixer']);
     grunt.registerTask('scripts', ['eslint', 'browserify:all_scripts']);
     grunt.registerTask('test', ['eslint', 'karma']);
+    grunt.registerTask('watch', ['watch:everything']);
 };
