@@ -14,6 +14,20 @@ module.exports = function(grunt) {
                 src: 'public/css/**/*.css'
             }
         },
+        assemble: {
+            options: {
+                assets: 'assets',
+                plugins: ['permalinks'],
+                partials: ['src/pages/includes/**/*.hbs'],
+                layout: ['src/pages/layouts/default.html'],
+                data: ['data/*.{json,yml}']
+            },
+            pages: {
+                files: {
+                    'public/': ['src/pages/**/*.hbs']
+                }
+            }
+        },
         browserify: {
             all_scripts: {
                 files: {
@@ -25,6 +39,7 @@ module.exports = function(grunt) {
                 }
             }
         },
+        clean: ['public'],
         eslint: {
             options: {
                 config: 'conf/eslint.json'
@@ -33,7 +48,9 @@ module.exports = function(grunt) {
         },
         less: {
             all_styles: {
-                options: {},
+                options: {
+                    strictImports: true
+                },
                 files: {
                     'public/css/common.css': 'src/less/common.less'
                 }
@@ -44,17 +61,22 @@ module.exports = function(grunt) {
                 files: ['src/js/**/*.js', 'src/less/**/*.less'],
                 tasks: ['browserify:all_scripts']
             },
-            all_scripts: {
+            scripts: {
                 files: ['src/js/**/*.js']
             },
-            all_styles: {
+            styles: {
                 files: ['src/less/**/*.less'],
                 tasks: ['less:all_styles', 'autoprefixer']
+            },
+            pages: {
+                files: ['src/pages/**/*.html', 'src/pages/**/*.hbs'],
+                tasks: ['assemble']
             }
         }
     });
 
     require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks("assemble");
 
     grunt.registerTask('default', ['styles', 'scripts']);
     grunt.registerTask('styles', ['less', 'autoprefixer']);
